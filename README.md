@@ -61,11 +61,11 @@ This will start:
 
 ### Root Level
 
-| Command      | Description                              |
-| ------------ | ---------------------------------------- |
-| `pnpm dev`   | Start API and client in development mode |
-| `pnpm build` | Build all packages                       |
-| `pnpm format`| Format code with Prettier                |
+| Command       | Description                              |
+| ------------- | ---------------------------------------- |
+| `pnpm dev`    | Start API and client in development mode |
+| `pnpm build`  | Build all packages                       |
+| `pnpm format` | Format code with Prettier                |
 
 ### API (`packages/api`)
 
@@ -104,3 +104,14 @@ Add a **sensor readings** feature to the field detail page. When a user views a 
 - **HTTP Client**: [Axios](https://axios-http.com/) - pre-configured instance at `src/api/client.ts`
 - **Data Fetching**: [React Query](https://tanstack.com/query) - see existing hooks in `src/hooks/` for examples
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) - utility-first CSS
+
+## Implementation Notes
+
+This implementation includes:
+
+- An API endpoint to fetch sensor reading for a specific field
+- A custom React Query hook for data fetching
+- Sensor readings displayed in the field detail page, including sensor type, value with unit and timestamp
+- Handling of loading, error and empty states
+
+**Currently, sensor readings are mocked in the backend and can be replaced with a database query.**

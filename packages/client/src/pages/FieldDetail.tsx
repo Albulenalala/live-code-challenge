@@ -1,9 +1,15 @@
 import { useParams, Link } from "react-router-dom"
 import { useField } from "../hooks/useField"
+import { useSensorReadings } from "../hooks/useSensorReadings"
 
 export default function FieldDetail() {
   const { id } = useParams<{ id: string }>()
   const { data: field, isLoading, error } = useField(id || "")
+  const {
+    data: readings,
+    isLoading: readingsLoading,
+    error: readingsError,
+  } = useSensorReadings(id || "")
 
   if (isLoading) {
     return <p className="text-gray-500">Loading field...</p>
@@ -31,8 +37,27 @@ export default function FieldDetail() {
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">Sensor Readings</h2>
 
-        {/* TODO: Implement sensor readings display — see README for details */}
-        <p className="text-gray-400 italic">Sensor readings will be displayed here.</p>
+        {readingsLoading ? (
+          <p className="text-gray-500">Loading sensor readings...</p>
+        ) : readingsError ? (
+          <p className="text-red-600">Failed to load sensor readings.</p>
+        ) : readings && readings.length > 0 ? (
+          <div className="space-y-3">
+            {readings.map((reading) => (
+              <div key={reading.id} className="border border-gray-200 rounded-lg p-4">
+                <p className="text-sm text-gray-500 capitalize">{reading.type}</p>
+                <p className="text-lg font-medium text-gray-900">
+                  {reading.value} {reading.unit}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {new Date(reading.timestamp).toLocaleString()}
+                </p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-400 italic">No sensor readings found.</p>
+        )}
       </div>
     </div>
   )
