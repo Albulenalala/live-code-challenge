@@ -9,7 +9,7 @@ export type SensorReading = {
   timestamp: string
 }
 
-async function getSensorReadings(fieldId: string) {
+async function getSensorReadings(fieldId: string): Promise<SensorReading[]> {
   const response = await api.get<SensorReading[]>(`/fields/${fieldId}/readings`)
   return response.data
 }

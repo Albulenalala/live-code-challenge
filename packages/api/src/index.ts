@@ -14,7 +14,6 @@ app.use(express.json())
 app.get("/fields", handleGetFields)
 app.get("/fields/:id", handleGetField)
 app.get("/fields/:id/readings", handleGetFieldReadings)
-
 app.listen(PORT, () => {
   console.log(`GreenLab API Server running on http://localhost:${PORT}`)
 })

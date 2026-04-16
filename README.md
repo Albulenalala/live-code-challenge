@@ -109,9 +109,9 @@ Add a **sensor readings** feature to the field detail page. When a user views a 
 
 This implementation includes:
 
-- An API endpoint to fetch sensor reading for a specific field
+- An API endpoint to fetch sensor readings for a specific field
 - A custom React Query hook for data fetching
 - Sensor readings displayed in the field detail page, including sensor type, value with unit and timestamp
 - Handling of loading, error and empty states
 
-**Currently, sensor readings are mocked in the backend and can be replaced with a database query.**
+**Sensor readings are retrieved from a PostgreSQL database using Kysely. The backend fetches all sensors for a field and returns the latest reading for each sensor based on the recorded timestamp.**
